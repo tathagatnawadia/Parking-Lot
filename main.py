@@ -1,12 +1,7 @@
-print("Hello Gojek")
-
-class Registration_number():
+class Registration():
 	delimiter = "-"
 	def __init__(self, registration_number):
-		self.segments = registration_number.split(Registration_number.delimiter)
+		self.segments = registration_number.split(Registration.delimiter)
 		self.registration_number = registration_number
-
-
-s = Registration_number("KA-23-22-33434")
-print(s.segments)
-
+	def dispose(self):
+		self.segments = None
