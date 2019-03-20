@@ -1,45 +1,7 @@
 import datetime
-import abc
 import sys
-
-
-class ParkingLotFull(Exception):
-	pass
-class NotFound(Exception):
-	pass
-class ExceedsLimit(Exception):
-	pass
-
-class Dumper(metaclass=abc.ABCMeta):
-	@abc.abstractmethod
-	def dump(self):
-		raise Exception('Compulsary implementation of dump method which dumps all data in the object')
-
-class Vechile():
-	def __init__(self, color=None):
-		self.color = color 
-		self.capacity = None
-		self.company = None
-		self.model = None
-		self.type_of_vechile = "SUV"
-
-
-class Registration(Dumper, Vechile):
-	delimiter = "-"
-	def __init__(self, registration_number, color):
-		self.segments = registration_number.split(Registration.delimiter)
-		self.registration_number = registration_number
-		self.checkin_time = str(datetime.datetime.now())
-		Vechile.__init__(self, color=color)
-
-	def dispose(self):
-		self.segments = None
-
-	def dump(self):
-		return vars(self)
-
-
-
+from includes.AppExceptions import *
+from includes.Registration import Registration
 
 class ParkingRow():
 	def __init__(self, number_of_slots):
