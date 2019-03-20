@@ -1,8 +1,14 @@
 import datetime
 import sys
+import multiprocessing
+
 from includes.AppExceptions import ParkingLotFull, NotFound, ExceedsLimit, IncorrectType
-from includes.Registration import Registration
+from includes.AppLogger import Audit
 from includes.Dumper import Dumper
+from includes.Messages import Message
+from includes.Registration import Registration
+
+lock = multiprocessing.Lock()
 
 class ParkingRow(Dumper):
 	def __init__(self, number_of_slots):
@@ -15,12 +21,16 @@ class ParkingRow(Dumper):
 		self.space_matrix = [None for i in range(self.number_of_slots)]
 
 	def allocate(self, registration, slot_number):
+		lock.acquire()
 		self.available_slots -= 1
 		self.space_matrix[slot_number] = registration
+		lock.release()
 
 	def deallocate(self, slot_number):
+		lock.acquire()
 		self.available_slots += 1
 		self.space_matrix[slot_number] = None
+		lock.release()
 
 	def find_empty(self):
 		for slot_number, slot_candidate in enumerate(self.space_matrix):
