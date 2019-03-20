@@ -12,7 +12,7 @@ class ParkingRow(Dumper):
 
 	def reset(self):
 		self.available_slots = self.number_of_slots
-		self.space_matrix = [None for i in range(number_of_slots)]
+		self.space_matrix = [None for i in range(self.number_of_slots)]
 
 	def allocate(self, registration, slot_number):
 		self.available_slots -= 1
@@ -50,6 +50,19 @@ class ParkingRow(Dumper):
 		self.deallocate(slot_number)
 		return slot_number
 
+	def find_by_registration(self, registration_number):
+		for slot_number, slot_candidate in enumerate(self.space_matrix):
+			if slot_candidate != None and slot_candidate.registration_number == registration_number:
+				return {"registration" : slot_candidate.dump(), "slot" : slot_number}
+		return None
+
+	def find_by_color(self, colors=[]):
+		parking_lot_vechiles = []
+		for slot_number, slot_candidate in enumerate(self.space_matrix):
+			if slot_candidate != None and slot_candidate.color in colors:
+				parking_lot_vechiles.append({"registration" : slot_candidate.dump(), "slot" : slot_number})
+		return parking_lot_vechiles
+
 	def dump(self):
 		result = [{ "registration": slot_candidate.dump(), "slot": slot_number} for slot_number, slot_candidate in enumerate(self.space_matrix) if slot_candidate != None]
 		return result
@@ -62,4 +75,7 @@ class ParkingRow(Dumper):
 # print(p.checkin(Registration(registration_number="MH-YY-95-9999", color="Purple")))
 # print(p.checkout(1))
 
-# print(p.space_matrix)
+# print(p.find_by_registration("MH-YY-95-9999"))
+
+
+

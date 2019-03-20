@@ -7,6 +7,9 @@
 #### Deallocating an already deallocated - 
 #### Maybe a vechile requires more than 1 parking slot - 
 #### Maybe have 2 or more colors to match - 
+#### Synchronise multiple parking lot data
+#### Auditor of data in a log file ?
+#### The test files are getting bloated - gotta add some fixtures and common functions
 
 ### Assumptions
 #### Colors and command are case sensitive (exactly as per the problem), not plannging to handle right now
