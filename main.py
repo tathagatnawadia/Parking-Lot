@@ -1,6 +1,6 @@
 import datetime
 import sys
-from includes.AppExceptions import *
+from includes.AppExceptions import ParkingLotFull, NotFound, ExceedsLimit, IncorrectType
 from includes.Registration import Registration
 
 class ParkingRow():
@@ -33,6 +33,8 @@ class ParkingRow():
 	def checkin(self, registration):
 		if self.available_slots == 0:
 			raise ParkingLotFull('Sorry, parking lot is full.')
+		if not isinstance(registration, Registration):
+			raise IncorrectType('Correct type : Registration')
 		first_empty_slot = self.find_empty()
 		self.allocate(registration, first_empty_slot)
 		return first_empty_slot
