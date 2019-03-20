@@ -3,7 +3,7 @@ from main import Registration
 
 class RegistrationTestCase(unittest.TestCase):
     def setUp(self):
-        self.registration = Registration("KA-23-22-33434")
+        self.registration = Registration("KA-23-22-33434","White")
 
     def test_segment_size(self):
         self.assertEqual(len(self.registration.segments), 4,
@@ -12,6 +12,7 @@ class RegistrationTestCase(unittest.TestCase):
     def test_registration_string(self):
         self.assertEqual(self.registration.registration_number, "KA-23-22-33434",
                          'wrong size after resize')
+    
     def tearDown(self):
         self.registration.dispose()
 
