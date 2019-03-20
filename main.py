@@ -2,8 +2,9 @@ import datetime
 import sys
 from includes.AppExceptions import ParkingLotFull, NotFound, ExceedsLimit, IncorrectType
 from includes.Registration import Registration
+from includes.Dumper import Dumper
 
-class ParkingRow():
+class ParkingRow(Dumper):
 	def __init__(self, number_of_slots):
 		self.number_of_slots = number_of_slots
 		self.available_slots = number_of_slots
@@ -48,6 +49,10 @@ class ParkingRow():
 		
 		self.deallocate(slot_number)
 		return slot_number
+
+	def dump(self):
+		result = [{ "registration": slot_candidate.dump(), "slot": slot_number} for slot_number, slot_candidate in enumerate(self.space_matrix) if slot_candidate != None]
+		return result
 
 
 # s = Registration(registration_number="KA-23-22-33434", color="White")

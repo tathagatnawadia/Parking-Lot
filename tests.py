@@ -1,8 +1,10 @@
 import unittest
 import random
+
 from includes.Registration import Registration
 from includes.AppExceptions import ParkingLotFull, NotFound, IncorrectType
 from main import ParkingRow
+
 
 class RegistrationTestCase(unittest.TestCase):
     def setUp(self):
@@ -78,11 +80,21 @@ class ParkingRowTestCase(unittest.TestCase):
 		self.assertEqual(self.parking_row.checkin(Registration(registration_number="PB-OO-66-1993", color="Blue")), 1, 'Wrong nearest allocation spot')
 		self.assertRaises(ParkingLotFull, self.parking_row.checkin, Registration(registration_number="KA-LP-79-9999", color="Purple"))
 
+	def test_dump(self):
+		self.populate(number_of_vechiles=2)
+		self.assertEqual(len(self.parking_row.dump()), 2, 'Wrong dump')
+		self.parking_row.checkout(1)
+		self.assertEqual(len(self.parking_row.dump()), 1, 'Wrong dump')
+		self.parking_row.checkout(0)
+		self.assertEqual(len(self.parking_row.dump()), 0, 'Wrong dump')
+		self.populate(number_of_vechiles=3)
+		self.assertEqual(len(self.parking_row.dump()), 3, 'Wrong dump')
 
 def suite():
     suite = unittest.TestSuite()
     suite.addTest(RegistrationTestCase('test_segment_size'))
     suite.addTest(RegistrationTestCase('test_registration_string'))
+
 
     suite.addTest(ParkingRowTestCase('test_basic_checkin'))
     suite.addTest(ParkingRowTestCase('test_checkin_overflow'))
@@ -90,6 +102,7 @@ def suite():
     suite.addTest(ParkingRowTestCase('test_checkout_twice'))
     suite.addTest(ParkingRowTestCase('test_checkin_checkout'))
     suite.addTest(ParkingRowTestCase('test_registration_type'))
+    suite.addTest(ParkingRowTestCase('test_dump'))
     return suite
 
 if __name__ == '__main__':
