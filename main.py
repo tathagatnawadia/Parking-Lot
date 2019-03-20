@@ -35,6 +35,7 @@ class ParkingRow():
 			raise ParkingLotFull('Sorry, parking lot is full.')
 		if not isinstance(registration, Registration):
 			raise IncorrectType('Correct type : Registration')
+
 		first_empty_slot = self.find_empty()
 		self.allocate(registration, first_empty_slot)
 		return first_empty_slot
@@ -44,8 +45,8 @@ class ParkingRow():
 			raise ExceedsLimit('Slot number exceeds limit.')
 		if self.find_by_slot(slot_number) == None:
 			raise NotFound('Slot is empty.')
-		else:
-			self.deallocate(slot_number)
+		
+		self.deallocate(slot_number)
 		return slot_number
 
 
