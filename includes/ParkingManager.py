@@ -55,7 +55,6 @@ class ParkingManager(Processor):
 	def process(self, command, parking_lot_code=0):
 		if command in self.command.keys():
 			return self.command[command]
-		elif command in self.command[parking_lot_code].keys(): 
+		if command in self.command[parking_lot_code].keys(): 
 			return self.command[parking_lot_code][command]
-		else:
-			raise UnknwnCommand("Unrecognizable command.")
+		raise UnknwnCommand("Unrecognizable command.")

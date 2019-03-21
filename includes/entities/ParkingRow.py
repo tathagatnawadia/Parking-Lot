@@ -14,7 +14,7 @@ class ParkingRow(Dumper):
 		self.space_matrix = self.manager.list([None for i in range(number_of_slots)])
 
 	def reset(self):
-		logging.warn('Reseting ParkingRow')
+		logging.warning('Reseting ParkingRow')
 		self.available_slots = self.manager.Value('available_slots', self.number_of_slots)
 		self.space_matrix = [None for i in range(self.number_of_slots)]
 
@@ -39,7 +39,7 @@ class ParkingRow(Dumper):
 
 	def checkin(self, registration):
 		if self.available_slots.get() == 0:
-			logging.warn('Parking lot full '+str(registration.dump()))
+			logging.warning('Parking lot full '+str(registration.dump()))
 			raise ParkingLotFull('Sorry, parking lot is full.')
 		if not isinstance(registration, Registration):
 			logging.error('Incorrect type of registration used')

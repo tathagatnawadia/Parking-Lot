@@ -39,12 +39,12 @@ def suite():
     suite.addTest(InputProcessorTestCase('test_user_input_parse'))
     suite.addTest(InputProcessorTestCase('test_process_call_for_manager_with_params'))
 
-    suite.addTest(ParkingManagerTestCase('test_making_another_parking_lot'))
-    suite.addTest(ParkingManagerTestCase('test_creating_single_parking_lot_func'))
-    suite.addTest(ParkingManagerTestCase('test_unknown_command'))
-    suite.addTest(ParkingManagerTestCase('test_all_parking_lot_commands_function'))
+    suite.addTest(ParkingManagerTestCase('test_making_another_parking_manager'))
+    suite.addTest(ParkingManagerTestCase('test_creating_parking_lots_func'))
+    suite.addTest(ParkingManagerTestCase('test_user_commands'))
     suite.addTest(ParkingManagerTestCase('test_sanity_usecase_1'))
-    
+    suite.addTest(ParkingManagerTestCase('test_sanity_usecase_2'))
+
     return suite
 
 if __name__ == '__main__':
