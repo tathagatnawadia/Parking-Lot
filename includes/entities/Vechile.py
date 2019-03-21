@@ -1,4 +1,4 @@
-from .Defaults import Default
+from includes.configs.Defaults import Default
 
 class Vechile():
 	def __init__(self, color=None):

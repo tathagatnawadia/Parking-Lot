@@ -1,5 +1,5 @@
 class Message(object):
-	ALLOCATION_SUCCESS				= "Allocating slot number: %s"
+	ALLOCATION_SUCCESS				= "Allocated slot number: %s"
 	PARKINGLOT_CREATION_SUCCESS		= "Created a parking lot with %s slots"
 	DEALLOCATION_SUCCESS			= "Slot number %s is free"
 	ALLOCATION_FAILURE_SLOTFULL 	= "Sorry, parking lot is full"

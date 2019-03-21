@@ -10,6 +10,8 @@
 #### Synchronise multiple parking lot data
 #### Auditor of data in a log file ?
 #### The test files are getting bloated - gotta add some fixtures and common functions
+#### Taking care of mutiple threads of the application
+#### bulk checkin/checkout
 
 ### Assumptions
 #### Colors and command are case sensitive (exactly as per the problem), not plannging to handle right now
@@ -19,3 +21,10 @@
 
 ### Unittest 
 #### python -m unittest tests.py
+
+### Run the application
+#### (filebased) python main.py ./functional_spec/fixtures/file_input.txt
+#### (interactive) python main.py
+
+### Folder structure
+#### Coming soon
