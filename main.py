@@ -1,7 +1,7 @@
 import datetime
 import sys
 
-from includes.log.AppLogger import Audit
+from includes.log.AppLogger import logging
 from includes.configs.Defaults import Default
 from includes.user.InputProcessor import InputProcessor
 
@@ -18,8 +18,7 @@ elif len(sys.argv) == 1:
 		user_input = input()
 		if user_input == Default.EXIT_CODE or user_input == Default.EMPTY:
 			break
-		else:
-			InputProcessor.process(goJekParking, user_input)
+		InputProcessor.process(goJekParking, user_input)
 else:
 	print("Correct Usage : ./parking_lot.py file_path_to_input.flat \n OR ")
 	print("Correct Usage : ./parking_lot.py")

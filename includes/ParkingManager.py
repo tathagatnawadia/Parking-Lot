@@ -1,5 +1,5 @@
 from includes.exceptions.AppExceptions import UnknwnCommand
-from includes.log.AppLogger import Audit
+from includes.log.AppLogger import *
 from includes.interfaces.Processor import Processor
 from includes.configs.Defaults import Action
 from includes.configs.UserCommands import UserCommands
@@ -21,6 +21,11 @@ class ParkingManager(Processor):
 		if ParkingManager.__instance == None:
 			ParkingManager()
 		return ParkingManager.__instance
+
+	@staticmethod
+	def reset():
+		ParkingManager.__instance = None
+		ParkingManager.__parkingLotCollections = None		
 
 	def __init__(self):
 		if ParkingManager.__instance != None:

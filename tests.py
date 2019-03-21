@@ -4,10 +4,13 @@ import random
 from apptests.RegistrationTest import RegistrationTestCase
 from apptests.ParkingRowTest import ParkingRowTestCase
 from apptests.ParkingLotTest import ParkingLotTestCase
+from apptests.InputProcessorTest import InputProcessorTestCase
+from apptests.ParkingManagerTest import ParkingManagerTestCase
 
 
 def suite():
     suite = unittest.TestSuite()
+
     suite.addTest(RegistrationTestCase('test_segment_size'))
     suite.addTest(RegistrationTestCase('test_registration_string'))
 
@@ -32,6 +35,15 @@ def suite():
     suite.addTest(ParkingLotTestCase('test_slot_numbers_for_cars_with_colour'))
     suite.addTest(ParkingLotTestCase('test_registration_numbers_for_cars_with_colour'))
     suite.addTest(ParkingLotTestCase('test_slot_number_for_registration_number'))
+
+    suite.addTest(InputProcessorTestCase('test_user_input_parse'))
+    suite.addTest(InputProcessorTestCase('test_process_call_for_manager_with_params'))
+
+    suite.addTest(ParkingManagerTestCase('test_making_another_parking_lot'))
+    suite.addTest(ParkingManagerTestCase('test_creating_single_parking_lot_func'))
+    suite.addTest(ParkingManagerTestCase('test_unknown_command'))
+    suite.addTest(ParkingManagerTestCase('test_all_parking_lot_commands_function'))
+    suite.addTest(ParkingManagerTestCase('test_sanity_usecase_1'))
     
     return suite
 
