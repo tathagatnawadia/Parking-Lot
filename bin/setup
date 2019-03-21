@@ -6,6 +6,9 @@
 # After this is run, bin/parking_lot
 # should Just Work.
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
 # apt install python3-pip
+# Handling of mac and linux both maybe
 pip install mock
-./run_functional_tests
+$DIR/run_functional_tests
