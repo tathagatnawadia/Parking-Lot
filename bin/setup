@@ -14,4 +14,4 @@ echo "INSTALLING pip mock"
 pip3 install mock --upgrade
 
 echo "RUNNING application tests"
-$DIR/bin/run_functional_tests
+$DIR/run_functional_tests
