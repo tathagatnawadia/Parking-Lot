@@ -15,6 +15,7 @@ def suite():
     suite.addTest(RegistrationTestCase('test_registration_string'))
 
     suite.addTest(ParkingRowTestCase('test_basic_checkin'))
+    suite.addTest(ParkingRowTestCase('test_duplicate_registration_entry'))
     suite.addTest(ParkingRowTestCase('test_checkin_overflow'))
     suite.addTest(ParkingRowTestCase('test_basic_checkout'))
     suite.addTest(ParkingRowTestCase('test_checkout_twice'))

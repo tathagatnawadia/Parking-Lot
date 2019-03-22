@@ -4,7 +4,7 @@ import multiprocessing
 import threading
 
 from includes.entities.Registration import Registration
-from includes.exceptions.AppExceptions import ParkingLotFull, NotFound, IncorrectType, DuplicateAssignment
+from includes.exceptions.AppExceptions import ParkingLotFull, NotFound, IncorrectType, DuplicateAssignment, DuplicateCarEntry
 from includes.entities.ParkingRow import ParkingRow
 
 
@@ -48,6 +48,16 @@ class ParkingRowTestCase(unittest.TestCase):
 		self.assertEqual(self.parking_row.available_slots.get(), 1, 'Wrong available slots')
 		self.assertEqual(self.parking_row.space_matrix[0].registration_number, "KA-23-22-33434", 'Wrong registration number')
 		self.assertEqual(self.parking_row.space_matrix[1].registration_number, "BR-5H-95-9999", 'Wrong registration number')
+
+	def test_duplicate_registration_entry(self):
+		self.assertEqual(self.parking_row.available_slots.get(), 3, 'Wrong available slots')
+		self.assertEqual(self.parking_row.checkin(Registration(registration_number="KA-23-22-33434", color="White")), 0, 'Wrong slot')
+		self.assertEqual(self.parking_row.checkin(Registration(registration_number="BR-5H-95-9999", color="Purple")), 1, 'Wrong slot')
+		self.assertEqual(self.parking_row.available_slots.get(), 1, 'Wrong available slots')
+		self.assertRaises(DuplicateCarEntry, self.parking_row.checkin, Registration(registration_number="BR-5H-95-9999", color="Purple"))
+		self.parking_row.checkout(1)
+		self.assertEqual(self.parking_row.checkin(Registration(registration_number="BR-5H-95-9999", color="Purple")), 1, 'Wrong slot')
+		
 
 	def test_checkin_overflow(self):
 		self.assertEqual(self.parking_row.available_slots.get(), 3, 'Wrong available slots')

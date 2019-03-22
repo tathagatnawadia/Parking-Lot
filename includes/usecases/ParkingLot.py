@@ -1,7 +1,7 @@
 import multiprocessing
 
 from includes.exceptions.AppExceptions import ParkingLotFull, NotFound, DuplicateAssignment
-from includes.log.AppLogger import *
+from includes.log.AppLogger import logging
 from includes.interfaces.Dumper import Dumper
 from includes.configs.Defaults import Default, Action
 from includes.configs.Messages import Message
@@ -45,7 +45,7 @@ class ParkingLot(Dumper):
 		output = []
 		output.append(Message.PARKINGLOT_STATUS_HEADER)
 		for parking in self.dump():
-			output.append(str(parking["slot"] + 1) + "\t" + parking["registration"]["registration_number"] + "\t " + parking["registration"]["color"])
+			output.append(str(parking["slot"] + 1) + "\t " + parking["registration"]["registration_number"] + "\t  " + parking["registration"]["color"])
 		return Default.NEWLINE.join(map(str, output))
 
 	def slot_numbers_for_cars_with_colour(self, params):

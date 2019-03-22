@@ -1,4 +1,4 @@
-from includes.exceptions.AppExceptions import ParkingLotFull, NotFound, ExceedsLimit, IncorrectType
+from includes.exceptions.AppExceptions import ParkingLotFull, NotFound, ExceedsLimit, IncorrectType, DuplicateCarEntry
 from includes.log.AppLogger import *
 from includes.interfaces.Dumper import Dumper
 from includes.configs.Defaults import Action
@@ -12,6 +12,7 @@ class ParkingRow(Dumper):
 		self.lock = multiprocessing_module.Lock()
 		self.available_slots = self.manager.Value('available_slots', number_of_slots)
 		self.space_matrix = self.manager.list([None for i in range(number_of_slots)])
+		self.registration_inventory = []
 
 	def reset(self):
 		logging.warning('Reseting ParkingRow')
@@ -20,10 +21,12 @@ class ParkingRow(Dumper):
 
 	def allocate(self, registration, slot_number):
 		self.available_slots.set(self.available_slots.get() - 1)
+		self.registration_inventory.append(registration.registration_number)
 		self.space_matrix[slot_number] = registration
 
 	def deallocate(self, slot_number):
 		self.available_slots.set(self.available_slots.get() + 1)
+		self.registration_inventory.remove(self.space_matrix[slot_number].registration_number)
 		self.space_matrix[slot_number] = None
 
 	def get_next_empty(self):
@@ -44,6 +47,9 @@ class ParkingRow(Dumper):
 		if not isinstance(registration, Registration):
 			logging.error('Incorrect type of registration used')
 			raise IncorrectType('Correct type : Registration')
+		if registration.registration_number in self.registration_inventory:
+			logging.error('Duplicate Car entry' + str(registration.dump()))
+			raise DuplicateCarEntry('Duplicate Car entry')
 
 		self.lock.acquire()
 		try:
@@ -63,6 +69,7 @@ class ParkingRow(Dumper):
 		self.lock.acquire()
 		try:
 			self.deallocate(slot_number)
+			logging.info('Success checkout ' + str(slot_number))
 		finally:
 			self.lock.release()
 
