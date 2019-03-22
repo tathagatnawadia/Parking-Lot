@@ -16,6 +16,12 @@
 ### Assumptions
 #### Colors and command are case sensitive (exactly as per the problem), not plannging to handle right now
 
+### Structure
+#### main creates an instance of ParkingManager which can have multiple ParkingLot 
+#### ParkingManager takes care of all the ParkingLot in the tech park maybe
+#### ParkingLot is the interface between the ParkingManager and the ParkingRow
+#### ParkingRow stores all the registration and stuff
+
 ### Performance & Memory Profiling 
 #### python -m cProfile main.py ./functional_spec/fixtures/file_input.txt
 
@@ -29,3 +35,4 @@
 #### (filebased) ./bin/parking_lot ./functional_spec/fixtures/file_input.txt
 #### (interactive) ./bin/parking_lot
 
+#### Note - just check if you are in sudo mode or enough permissions for ./bin/setup

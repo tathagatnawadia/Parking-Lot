@@ -34,3 +34,5 @@ MANIFEST
 .venv
 env/
 venv/
+
+.DS_Store

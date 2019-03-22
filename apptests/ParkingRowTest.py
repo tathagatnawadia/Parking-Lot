@@ -162,21 +162,3 @@ class ParkingRowTestCase(unittest.TestCase):
 		thread4.join()
 		self.assertEqual(self.parking_row.available_slots.get(), 23, "Program not threadsafe")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

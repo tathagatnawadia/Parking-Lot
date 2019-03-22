@@ -53,6 +53,7 @@ class ParkingManager(Processor):
 		return fresh_parking_lot.assign_parking_lot(number_of_slots)
 
 	def process(self, command, parking_lot_code=0):
+		# process commands like - park, status, leave and so on
 		if command in self.command.keys():
 			return self.command[command]
 		if command in self.command[parking_lot_code].keys(): 

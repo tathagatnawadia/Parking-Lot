@@ -7,8 +7,10 @@ from includes.user.InputProcessor import InputProcessor
 
 from includes.ParkingManager import ParkingManager
 
+# We declare a singleton parking manager and pass the instance to the InputProcessor class to process user commands
 goJekParking = ParkingManager()
 
+# 2 modes of input - command line and interactive
 if len(sys.argv) == 2:
 	with open(sys.argv[1], "r") as input_file:
 		for user_input in input_file:
@@ -20,5 +22,5 @@ elif len(sys.argv) == 1:
 			break
 		InputProcessor.process(goJekParking, user_input)
 else:
-	print("Correct Usage : ./parking_lot.py file_path_to_input.flat \n OR ")
-	print("Correct Usage : ./parking_lot.py")
+	print("Correct Usage : ./main.py file_path_to_input.flat \n OR ")
+	print("Correct Usage : ./main.py")
