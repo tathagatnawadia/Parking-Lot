@@ -10,9 +10,9 @@ from includes.ParkingManager import ParkingManager
 goJekParking = ParkingManager()
 
 if len(sys.argv) == 2:
-	input_file = open(sys.argv[1], "r")
-	for user_input in input_file:
-		InputProcessor.process(goJekParking, user_input)
+	with open(sys.argv[1], "r") as input_file:
+		for user_input in input_file:
+			InputProcessor.process(goJekParking, user_input)
 elif len(sys.argv) == 1:
 	while True:
 		user_input = input()

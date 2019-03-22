@@ -2,13 +2,16 @@
 # * Install dependencies
 # * Build/Compile
 # * Run Test Suit to validate
-#
 # After this is run, bin/parking_lot
 # should Just Work.
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-# apt install python3-pip
-# Handling of mac and linux both maybe
-pip install mock
-$DIR/run_functional_tests
+echo "INSTALLING PIP"
+apt-get -f install python3-pip
+
+echo "INSTALLING pip mock"
+pip3 install mock --upgrade
+
+echo "RUNNING application tests"
+$DIR/bin/run_functional_tests
