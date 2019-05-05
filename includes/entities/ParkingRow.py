@@ -1,8 +1,6 @@
 from includes.exceptions.AppExceptions import ParkingLotFull, NotFound, ExceedsLimit, IncorrectType, DuplicateCarEntry
 from includes.log.AppLogger import *
 from includes.interfaces.Dumper import Dumper
-from includes.configs.Defaults import Action
-from includes.configs.Messages import Message
 from includes.entities.Registration import Registration
 
 class ParkingRow(Dumper):
